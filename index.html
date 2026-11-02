@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUANT AI - Premium AI Platform</title>
+    <meta name="description" content="QUANT AI is a premium, privacy-first local artificial intelligence ecosystem. Connect your local QUANT Agent to experience unrestricted computational capability.">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body class="dark-theme">
+    <!-- Particle Background -->
+    <div id="particle-container"></div>
+    <!-- Premium 3D Shapes -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    <div class="ambient-glow top-left"></div>
+    <div class="ambient-glow bottom-right"></div>
+
+    <div id="app-container">
+        <!-- Sidebar Navigation -->
+        <nav id="sidebar" class="glass-panel">
+            <div class="sidebar-header">
+                <div class="brand-logo">
+                    <span class="logo-q">Q</span>
+                    <span class="logo-text">QUANT</span>
+                </div>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#" data-route="welcome" class="nav-item active"><i class="icon-home"></i> <span data-i18n="nav.home">Home</span></a></li>
+                <li><a href="#chat" data-route="chat" class="nav-item"><i class="icon-chat"></i> <span data-i18n="nav.chat">Chat Workspace</span></a></li>
+                <li><a href="#history" data-route="history" class="nav-item"><i class="icon-history"></i> <span data-i18n="nav.history">History</span></a></li>
+                <li class="nav-divider"></li>
+                <li><a href="#agent" data-route="agent" class="nav-item"><i class="icon-agent"></i> <span data-i18n="nav.agent">Agent Setup</span></a></li>
+                <li><a href="#workspace" data-route="workspace" class="nav-item"><i class="icon-folder"></i> <span data-i18n="nav.workspace">Workspace</span></a></li>
+                <li><a href="#permissions" data-route="permissions" class="nav-item"><i class="icon-shield"></i> <span data-i18n="nav.permissions">Permissions</span></a></li>
+                <li><a href="#downloads" data-route="downloads" class="nav-item"><i class="icon-download"></i> <span data-i18n="nav.downloads">Downloads</span></a></li>
+                <li class="nav-divider"></li>
+                <li><a href="#profile" data-route="profile" class="nav-item"><i class="icon-user"></i> <span data-i18n="nav.profile">Profile</span></a></li>
+                <li><a href="#subscription" data-route="subscription" class="nav-item"><i class="icon-card"></i> <span data-i18n="nav.subscription">Subscriptions</span> <span style="font-size: 0.7rem; background: var(--primary-color); padding: 2px 6px; border-radius: 10px; margin-left: 8px;">PRO</span></a></li>
+                <li><a href="#settings" data-route="settings" class="nav-item"><i class="icon-settings"></i> <span data-i18n="nav.settings">Settings</span></a></li>
+                <li><a href="#info" data-route="info" class="nav-item"><i class="icon-info"></i> <span data-i18n="nav.info">Info</span></a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="agent-status-mini disconnected">
+                    <div class="status-dot"></div>
+                    <span data-i18n="status.disconnected">Agent Not Connected</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <header class="top-bar glass-panel">
+                <div class="page-title" id="top-bar-title">Welcome to QUANT AI</div>
+                <div class="top-bar-actions" style="display: flex; align-items: center; gap: 12px;">
+                    <button id="top-bar-coop-btn" class="btn-secondary" style="padding: 6px 14px; font-size: 0.85rem; border-radius: 20px; display: flex; align-items: center; gap: 6px; border-color: var(--border-highlight); background: rgba(140,82,255,0.15); color: var(--text-primary); font-weight: 600;">
+                        👥 <span>الأصدقاء / الجلسة المشتركة</span>
+                    </button>
+                    <select id="lang-switcher" class="lang-switch-select" onchange="window.i18n.setLanguage(this.value)">
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                        <option value="ja">にほんご</option>
+                    </select>
+                    <div class="user-avatar">
+                        <!-- Populated dynamically by router -->
+                    </div>
+                </div>
+            </header>
+            
+            <div id="view-container">
+                <!-- Views injected by router -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="global-loader" class="loader-overlay active">
+        <div class="css-loader"></div>
+        <div class="loader-text">INITIALIZING QUANT CORE...</div>
+    </div>
+    <script>
+        // Failsafe: guarantee global loader is dismissed even if network or scripts lag
+        setTimeout(function() {
+            var loader = document.getElementById('global-loader');
+            if (loader && loader.classList.contains('active')) {
+                loader.classList.add('fade-out');
+                setTimeout(function() {
+                    loader.classList.remove('active');
+                    loader.style.display = 'none';
+                }, 400);
+            }
+        }, 2200);
+    </script>
+
+    <!-- Scripts — Zero Trust Architecture -->
+    <!-- Google login and subscription checks use Firebase Authentication and Firestore. -->
+
+    <!--
+        firebase-sync.js is a module (Firebase v9+ requires ES module
+        imports). Module scripts are deferred by spec, so to guarantee
+        window.FirebaseSync exists before app.js's CoopRoomManager can
+        possibly be invoked, every classic script below is also marked
+        defer — this keeps ALL of them executing in one deferred queue,
+        in document order, after HTML parsing finishes and firebase-sync.js
+        has run.
+    -->
+    <script type="module" src="assets/js/firebase-sync.js"></script>
+
+    <script src="assets/js/i18n.js" defer></script>
+    <script src="assets/js/config.js" defer></script>
+    <script src="assets/js/state.js" defer></script>
+    <script src="assets/js/diff-util.js" defer></script>
+    <script src="assets/js/ai-providers.js" defer></script>
+    <script src="assets/js/agent-client.js" defer></script>
+    <script src="assets/js/views/LoginView.js" defer></script>
+    <script src="assets/js/views/OnboardingView.js" defer></script>
+    <script src="assets/js/views/WelcomeView.js" defer></script>
+    <script src="assets/js/views/ChatView.js" defer></script>
+    <script src="assets/js/views/ConversationHistoryView.js" defer></script>
+    <script src="assets/js/views/AgentSetupView.js" defer></script>
+    <script src="assets/js/views/WorkspaceSetupView.js" defer></script>
+    <script src="assets/js/views/PermissionCenterView.js" defer></script>
+    <script src="assets/js/views/DownloadsView.js" defer></script>
+    <script src="assets/js/views/ProfileView.js" defer></script>
+    <script src="assets/js/views/SubscriptionView.js" defer></script>
+    <script src="assets/js/views/SettingsView.js" defer></script>
+    <script src="assets/js/views/InfoView.js" defer></script>
+    <script src="assets/js/router.js" defer></script>
+    <script src="assets/js/app.js" defer></script>
+</body>
+</html>

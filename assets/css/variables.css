@@ -1,0 +1,71 @@
+:root {
+    /* Color Palette */
+    --bg-base: #05050a;
+    --bg-surface: rgba(15, 17, 26, 0.65);
+    --bg-surface-hover: rgba(30, 35, 55, 0.85);
+    
+    --primary-color: #8c52ff; /* Deep Neon Purple */
+    --secondary-color: #ff387e; /* Hot Neon Pink */
+    --accent-color: #00e5ff; /* Cyan Glow */
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --gradient-glow: linear-gradient(135deg, rgba(140,82,255,0.4), rgba(255,56,126,0.4));
+
+    --text-primary: #ffffff;
+    --text-secondary: #b4bcdc;
+    --text-muted: #6b728e;
+    
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-highlight: rgba(140, 82, 255, 0.4);
+    
+    --status-connected: #10b981;
+    --status-disconnected: #ef4444;
+    --status-busy: #f59e0b;
+    --status-executing: #8b5cf6;
+    --status-waiting: #3b82f6;
+
+    /* Typography */
+    --font-primary: 'Inter', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+    
+    /* Effects & Glassmorphism */
+    --glass-blur: blur(16px);
+    --glass-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+    --glow-primary: 0 0 25px rgba(140, 82, 255, 0.6);
+    --glow-accent: 0 0 20px rgba(0, 229, 255, 0.5);
+    
+    /* Layout */
+    --sidebar-width: 280px;
+    --header-height: 70px;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease-out;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Light Theme Override ──────────────────────────────── */
+body.light-theme {
+    --bg-base: #f0f2f5;
+    --bg-surface: rgba(255, 255, 255, 0.85);
+    --bg-surface-hover: rgba(235, 238, 245, 0.95);
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --border-highlight: rgba(124, 111, 255, 0.4);
+    --glass-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* ─── Neon Cyberpunk Theme Override ─────────────────────── */
+body.neon-theme {
+    --bg-base: #0a0014;
+    --bg-surface: rgba(20, 5, 40, 0.7);
+    --bg-surface-hover: rgba(40, 10, 60, 0.85);
+    --primary-color: #bf5af2;
+    --secondary-color: #ff375f;
+    --accent-color: #30d158;
+    --border-color: rgba(191, 90, 242, 0.15);
+    --border-highlight: rgba(191, 90, 242, 0.5);
+    --glow-primary: 0 0 20px rgba(191, 90, 242, 0.6);
+}
